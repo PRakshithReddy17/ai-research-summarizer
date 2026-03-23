@@ -6,6 +6,9 @@ Run with:  pytest tests/ -v
 
 import numpy as np
 import pytest
+from dotenv import load_dotenv
+
+load_dotenv()  # Ensure HF_API_TOKEN is available for embedding tests
 
 from modules.chunking import split_text
 from modules.embeddings import create_embeddings
