@@ -6,8 +6,7 @@ huggingface_hub
 langchain-text-splitters
 numpy
 pypdf
-pytest
 python-dotenv
 python-multipart
 requests
-uvicorn[standard]
+uvicorn

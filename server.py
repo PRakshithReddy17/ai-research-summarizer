@@ -84,7 +84,7 @@ async def startup_load_papers():
 
     # --- Environment validation ---
     hf_token = os.getenv("HF_API_TOKEN")
-    hf_model = os.getenv("HF_MODEL_NAME", "google/flan-t5-large")
+    hf_model = os.getenv("HF_MODEL_NAME", "Qwen/Qwen2.5-Coder-32B-Instruct")
 
     if not hf_token:
         print("[WARNING] HF_API_TOKEN is not set. The /ask and /summarize endpoints will not work.")
