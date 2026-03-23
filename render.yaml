@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ai-research-summarizer-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: HF_MODEL_NAME
+        value: Qwen/Qwen2.5-Coder-32B-Instruct
+      - key: CORS_ORIGINS
+        sync: false
+      - key: HF_API_TOKEN
+        sync: false
+      - key: API_KEY
+        sync: false
+      - key: RATE_LIMIT_RPM
+        value: "30"
+      - key: PYTHON_VERSION
+        value: "3.11.11"

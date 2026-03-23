@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ars-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - HF_API_TOKEN=${HF_API_TOKEN}
+      - HF_MODEL_NAME=${HF_MODEL_NAME:-Qwen/Qwen2.5-Coder-32B-Instruct}
+      - CORS_ORIGINS=${CORS_ORIGINS:-*}
+      - API_KEY=${API_KEY:-}
+      - RATE_LIMIT_RPM=${RATE_LIMIT_RPM:-30}
+    volumes:
+      - paper-data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: ars-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_API_KEY=${API_KEY:-}
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  paper-data:

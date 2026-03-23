@@ -1,0 +1,14 @@
+arxiv
+faiss-cpu
+fastapi
+httpx
+huggingface_hub
+langchain-text-splitters
+numpy
+pypdf
+pytest
+python-dotenv
+python-multipart
+requests
+sentence-transformers
+uvicorn[standard]

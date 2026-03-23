@@ -1,0 +1,32 @@
+# ---- Next.js frontend ----
+FROM node:20-alpine AS base
+
+WORKDIR /app
+
+# Install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# Copy source
+COPY app/ app/
+COPY components/ components/
+COPY lib/ lib/
+COPY styles/ styles/
+COPY next.config.mjs .
+COPY next-env.d.ts .
+COPY tsconfig.json .
+COPY tailwind.config.ts .
+COPY postcss.config.js .
+COPY components.json .
+
+# Build
+ARG NEXT_PUBLIC_API_URL=http://localhost:8000
+ARG NEXT_PUBLIC_API_KEY=
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_API_KEY=${NEXT_PUBLIC_API_KEY}
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
